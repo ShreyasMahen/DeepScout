@@ -1,21 +1,21 @@
 from fastapi import FastAPI
 
+from app.api.routes.health import router as health_router
+from app.core.config import settings
+
+
 app = FastAPI(
-    title="DeepScout API",
+    title=settings.app_name,
     description="Backend API for the DeepScout AI Research Engine",
-    version="0.1.0",
+    version=settings.app_version,
 )
+
+app.include_router(health_router)
 
 
 @app.get("/")
 def root():
     return {
-        "message": "DeepScout API is running"
-    }
-
-
-@app.get("/health")
-def health_check():
-    return {
-        "status": "healthy"
+        "message": f"{settings.app_name} is running",
+        "environment": settings.environment
     }
