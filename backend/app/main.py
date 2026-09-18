@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.api.routes.health import router as health_router
 from app.api.routes.scout import router as scout_router
+from app.api.routes.planner import router as planner_router
 from app.core.config import settings
 
 
@@ -13,6 +14,7 @@ app = FastAPI(
 
 app.include_router(health_router)
 app.include_router(scout_router)
+app.include_router(planner_router)
 
 
 @app.get("/")
